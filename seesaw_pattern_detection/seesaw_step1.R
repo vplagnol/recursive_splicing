@@ -1,6 +1,6 @@
 library(GenomicRanges)
 library(biomaRt)
-source('scripts/tools.R')
+source('seesaw_pattern_detection/tools.R')
 
 input.warren <- 'data/Final_150K_junction_analysis.csv'
 #input.warren <-'data/fromWarren/Whole_genome_50Kplus_updated_15_07_2013_v1_rec_details_v08_trunc.txt'
