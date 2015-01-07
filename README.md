@@ -16,6 +16,7 @@ Running
 sh figure_scripts/make_figures.sh
 
 should create the figures used in the paper (placed in the folder fig)
+The text output of the R code for each script is located in the Rout folder.
 
 
 # seesaw pattern analysis

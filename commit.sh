@@ -1,3 +1,3 @@
 git add -u
-git commit -m "Added R output files"
+git commit -m "Updated README"
 git push -u origin master
