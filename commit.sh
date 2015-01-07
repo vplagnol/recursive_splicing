@@ -1,3 +1,3 @@
 git add -u
-git commit -m "Added the bodymap scripts"
+git commit -m "Bodymap scripts are now running"
 git push -u origin master

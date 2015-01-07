@@ -4,4 +4,4 @@
 
 R CMD BATCH --no-save --no-restore figure_scripts/Bodymap_scatterplots.R Rout/Bodymap_scatterplots.Rout
 
-R CMD BATCH --no-save --no-restore figure_scripts/Bodymap_Loess.R Rout/Bodymap_Loess.Rout
+#R CMD BATCH --no-save --no-restore figure_scripts/Bodymap_Loess.R Rout/Bodymap_Loess.Rout
