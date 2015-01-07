@@ -7,7 +7,7 @@ The RNASeq data that have been used for this work have been deposited in the SRA
 The relevant accession ID can be found in the file
 support/sample_accessions_ukbec.xlsx
 
-# figure_scripts
+# Figures included in the submitted work
 
 The scripts used to generated figures are store in the folder
 figure_scripts
