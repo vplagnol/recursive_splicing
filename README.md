@@ -18,4 +18,11 @@ sh figure_scripts/make_figures.sh
 should create the figures used in the paper (placed in the folder fig)
 
 
+# seesaw pattern analysis
+
+The RNASeq analysis for that specific seesaw pattern is somewhat complex, and can the relevant scripts can be found in this folder
+seesaw_pattern_detection/
+
+This is still a work in progress and some example scripts will be placed there in the near future.
+
 
