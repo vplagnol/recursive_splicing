@@ -1,3 +1,3 @@
 git add -u
-git commit -m "Updated README"
+git commit -m "Added the bodymap scripts"
 git push -u origin master

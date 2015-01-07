@@ -1,24 +1,26 @@
-
-Adipose = read.csv("data/RNASeq_bodymap/Adipose_vs_brain.csv", sep=",", head=TRUE)
-Adrenal = read.csv("data/RNASeq_bodymap/Adrenal_vs_brain.csv", sep=",", head=TRUE)
-Breast = read.csv("data/RNASeq_bodymap/Breast_vs_brain.csv", sep=",", head=TRUE)
-Colon = read.csv("data/RNASeq_bodymap/Colon_vs_brain.csv", sep=",", head=TRUE)
-Heart = read.csv("data/RNASeq_bodymap/Heart_vs_brain.csv", sep=",", head=TRUE)
-Kidney = read.csv("data/RNASeq_bodymap/Kidney_vs_brain.csv", sep=",", head=TRUE)
-Liver = read.csv("data/RNASeq_bodymap/Liver_vs_brain.csv", sep=",", head=TRUE)
-Lung = read.csv("data/RNASeq_bodymap/Lung_vs_brain.csv", sep=",", head=TRUE)
-Lymph = read.csv("data/RNASeq_bodymap/Lymph_vs_brain.csv", sep=",", head=TRUE)
-Ovary = read.csv("data/RNASeq_bodymap/Ovary_vs_brain.csv", sep=",", head=TRUE)
-Prostate = read.csv("data/RNASeq_bodymap/Prostate_vs_brain.csv", sep=",", head=TRUE)
-Skeletal = read.csv("data/RNASeq_bodymap/Skel_muscle_vs_brain.csv", sep=",", head=TRUE)
-Testes = read.csv("data/RNASeq_bodymap/Testes_vs_brain.csv", sep=",", head=TRUE)
-Thyroid = read.csv("data/RNASeq_bodymap/Thyroid_vs_brain.csv", sep=",", head=TRUE)
-White = read.csv("data/RNASeq_bodymap/White_vs_brain.csv", sep=",", head=TRUE)
-
-
 library(ggplot2)
 library(reshape2)
 library(plyr)
+
+
+Adipose = read.csv("data/RNASeq_bodymap/Adipose_vs_brain.csv.gz", sep=",", head=TRUE)
+Adrenal = read.csv("data/RNASeq_bodymap/Adrenal_vs_brain.csv.gz", sep=",", head=TRUE)
+Breast = read.csv("data/RNASeq_bodymap/Breast_vs_brain.csv.gz", sep=",", head=TRUE)
+Colon = read.csv("data/RNASeq_bodymap/Colon_vs_brain.csv.gz", sep=",", head=TRUE)
+Heart = read.csv("data/RNASeq_bodymap/Heart_vs_brain.csv.gz", sep=",", head=TRUE)
+Kidney = read.csv("data/RNASeq_bodymap/Kidney_vs_brain.csv.gz", sep=",", head=TRUE)
+Liver = read.csv("data/RNASeq_bodymap/Liver_vs_brain.csv.gz", sep=",", head=TRUE)
+Lung = read.csv("data/RNASeq_bodymap/Lung_vs_brain.csv.gz", sep=",", head=TRUE)
+Lymph = read.csv("data/RNASeq_bodymap/Lymph_vs_brain.csv.gz", sep=",", head=TRUE)
+Ovary = read.csv("data/RNASeq_bodymap/Ovary_vs_brain.csv.gz", sep=",", head=TRUE)
+Prostate = read.csv("data/RNASeq_bodymap/Prostate_vs_brain.csv.gz", sep=",", head=TRUE)
+Skeletal = read.csv("data/RNASeq_bodymap/Skel_muscle_vs_brain.csv.gz", sep=",", head=TRUE)
+Testes = read.csv("data/RNASeq_bodymap/Testes_vs_brain.csv.gz", sep=",", head=TRUE)
+Thyroid = read.csv("data/RNASeq_bodymap/Thyroid_vs_brain.csv.gz", sep=",", head=TRUE)
+White = read.csv("data/RNASeq_bodymap/White_vs_brain.csv.gz", sep=",", head=TRUE)
+
+message('Done parsing the input files')
+
 
 # Subset relevant data
 
@@ -70,5 +72,7 @@ Loess <- Loess[!is.infinite(Loess$value), ]
 Loess <- Loess[!is.na(Loess$Length), ]
 Loess <- Loess[!is.infinite(Loess$Length), ]
 
-ggplot(Loess, aes(x=log10(Length), y=value, colour=factor(variable))) + geom_smooth(method = "loess", aes(x=log10(Length), y=value), se = FALSE, size=1.2) + ylab("Log2(Fold Expression vs. Brain)") + xlab("Gene length") + geom_vline(x=log10(150000), colour="steelblue", linetype = "longdash") 
+p <- ggplot(Loess, aes(x=log10(Length), y=value, colour=factor(variable))) + geom_smooth(method = "loess", aes(x=log10(Length), y=value), se = FALSE, size=1.2) + ylab("Log2(Fold Expression vs. Brain)") + xlab("Gene length") + geom_vline(x=log10(150000), colour="steelblue", linetype = "longdash") 
 
+
+ggsave(plot = p, filename = 'fig/bodymap_loess.pdf')

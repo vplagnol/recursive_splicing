@@ -1,7 +1,8 @@
 
-R version 3.1.2 (2014-10-31) -- "Pumpkin Helmet"
-Copyright (C) 2014 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin13.4.0 (64-bit)
+R version 2.15.2 (2012-10-26) -- "Trick or Treat"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: i386-apple-darwin9.8.0/i386 (32-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -24,11 +25,11 @@ gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
 
 Attaching package: ‘gdata’
 
-The following object is masked from ‘package:stats’:
+The following object(s) are masked from ‘package:stats’:
 
     nobs
 
-The following object is masked from ‘package:utils’:
+The following object(s) are masked from ‘package:utils’:
 
     object.size
 
@@ -37,95 +38,9 @@ The following object is masked from ‘package:utils’:
 > 
 >  
 > Cryptic <- read.xls("data//Ule_EDtable1.xlsx", sheet=5, method=("csv"), header=TRUE, pattern="Chromosome")
-> 
-> # Restrict analysis only to those genes were canonical first exon-exon junction detected
-> 
-> Keep <- Cryptic[grep("Exon-Exon", Cryptic$Junction.type), ]
-> Keep <- subset(Keep, Counts >= "1")
-> Cryptic <- Cryptic[which(Cryptic$Gene.ID %in% Keep$Gene.ID),]
-> 
-> # Determine average number of cryptic elements per intron
-> 
-> Cryptic_summary <- ddply(Cryptic, c("Gene.ID", "X1st.Intron.Bin"), summarise, Novel=sum(Junction.type=="Novel"))
-> Cryptic_summary$X1st.Intron.Bin <- factor(Cryptic_summary$X1st.Intron.Bin, levels = c("0.1-2kb", "2-5kb", "5-10kb", "10-20kb", "20-50kb", "50-100kb", "100kb+"))
-> 
-> p <- ggplot(Cryptic_summary) + geom_boxplot(aes(x=X1st.Intron.Bin, y=Novel), outlier.size = 0, fill="#0072B2") + coord_cartesian(ylim = c(-0.2, 10)) +  scale_y_continuous(breaks=seq(0, 10, 2)) + stat_summary(aes(x=X1st.Intron.Bin, y=Novel), fun.y = "mean", geom = "point",  pch= 18, size= 7, color= "red") 
-> 
-> ggsave(plot = p, filename = 'fig/Fig4A_first_intron_novel_junction.pdf')
-Saving 7 x 7 in image
-> 
-> 
-> # Mann Whitney U test with two tails / Wilcoxon Rank Sum Test
-> 
-> G1 <- subset(Cryptic_summary, Cryptic_summary$X1st.Intron.Bin=="0.1-2kb")
-> G2 <- subset(Cryptic_summary, Cryptic_summary$X1st.Intron.Bin=="2-5kb")
-> G3 <- subset(Cryptic_summary, Cryptic_summary$X1st.Intron.Bin=="5-10kb")
-> G4 <- subset(Cryptic_summary, Cryptic_summary$X1st.Intron.Bin=="10-20kb")
-> G5 <- subset(Cryptic_summary, Cryptic_summary$X1st.Intron.Bin=="20-50kb")
-> G6 <- subset(Cryptic_summary, Cryptic_summary$X1st.Intron.Bin=="50-100kb")
-> G7 <- subset(Cryptic_summary, Cryptic_summary$X1st.Intron.Bin=="100kb+")
-> 
-> wilcox.test(G7$Novel, G1$Novel)
-
-	Wilcoxon rank sum test with continuity correction
-
-data:  G7$Novel and G1$Novel
-W = 281854.5, p-value < 2.2e-16
-alternative hypothesis: true location shift is not equal to 0
-
-> wilcox.test(G7$Novel, G2$Novel)
-
-	Wilcoxon rank sum test with continuity correction
-
-data:  G7$Novel and G2$Novel
-W = 255070, p-value < 2.2e-16
-alternative hypothesis: true location shift is not equal to 0
-
-> wilcox.test(G7$Novel, G3$Novel)
-
-	Wilcoxon rank sum test with continuity correction
-
-data:  G7$Novel and G3$Novel
-W = 180715.5, p-value < 2.2e-16
-alternative hypothesis: true location shift is not equal to 0
-
-> wilcox.test(G7$Novel, G4$Novel)
-
-	Wilcoxon rank sum test with continuity correction
-
-data:  G7$Novel and G4$Novel
-W = 160068, p-value < 2.2e-16
-alternative hypothesis: true location shift is not equal to 0
-
-> wilcox.test(G7$Novel, G5$Novel)
-
-	Wilcoxon rank sum test with continuity correction
-
-data:  G7$Novel and G5$Novel
-W = 140870.5, p-value = 4.05e-12
-alternative hypothesis: true location shift is not equal to 0
-
-> wilcox.test(G7$Novel, G6$Novel)
-
-	Wilcoxon rank sum test with continuity correction
-
-data:  G7$Novel and G6$Novel
-W = 48919.5, p-value = 0.0361
-alternative hypothesis: true location shift is not equal to 0
-
-> wilcox.test(G7$Novel, G7$Novel)
-
-	Wilcoxon rank sum test with continuity correction
-
-data:  G7$Novel and G7$Novel
-W = 25764.5, p-value = 1
-alternative hypothesis: true location shift is not equal to 0
-
-> 
-> 
-> 
-> 
-> 
-> proc.time()
-   user  system elapsed 
-100.492   2.586 105.821 
+Error in xls2sep(xls, sheet, verbose = verbose, ..., method = method,  : 
+  Intermediate file '/var/folders/4_/zygthl7j0rz8644fhnylqj3r0000gn/T//RtmpeHsy9e/file71ef681e2152.csv' missing!
+Calls: read.xls -> xls2sep
+Error in file.exists(tfn) : invalid 'file' argument
+Calls: read.xls -> xls2sep
+Execution halted

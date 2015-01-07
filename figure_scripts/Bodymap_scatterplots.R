@@ -1,32 +1,29 @@
-install.packages("plotrix")
-install.packages("ggplot2")
-install.packages("plyr")
-install.packages("reshape2")
-
 library(ggplot2)
 library(reshape2)
 library(plyr)
 library(plotrix)
+library(gridExtra)
 
 
 # Read in DESeq output with which coding genes have been indicated and max gene lengths added
+Adipose = read.csv("data/RNASeq_bodymap/Adipose_vs_brain.csv.gz", sep=",", head=TRUE)
+Adrenal = read.csv("data/RNASeq_bodymap/Adrenal_vs_brain.csv.gz", sep=",", head=TRUE)
+Breast = read.csv("data/RNASeq_bodymap/Breast_vs_brain.csv.gz", sep=",", head=TRUE)
+Colon = read.csv("data/RNASeq_bodymap/Colon_vs_brain.csv.gz", sep=",", head=TRUE)
+Heart = read.csv("data/RNASeq_bodymap/Heart_vs_brain.csv.gz", sep=",", head=TRUE)
+Kidney = read.csv("data/RNASeq_bodymap/Kidney_vs_brain.csv.gz", sep=",", head=TRUE)
+Liver = read.csv("data/RNASeq_bodymap/Liver_vs_brain.csv.gz", sep=",", head=TRUE)
+Lung = read.csv("data/RNASeq_bodymap/Lung_vs_brain.csv.gz", sep=",", head=TRUE)
+Lymph = read.csv("data/RNASeq_bodymap/Lymph_vs_brain.csv.gz", sep=",", head=TRUE)
+Ovary = read.csv("data/RNASeq_bodymap/Ovary_vs_brain.csv.gz", sep=",", head=TRUE)
+Prostate = read.csv("data/RNASeq_bodymap/Prostate_vs_brain.csv.gz", sep=",", head=TRUE)
+Skeletal = read.csv("data/RNASeq_bodymap/Skel_muscle_vs_brain.csv.gz", sep=",", head=TRUE)
+Testes = read.csv("data/RNASeq_bodymap/Testes_vs_brain.csv.gz", sep=",", head=TRUE)
+Thyroid = read.csv("data/RNASeq_bodymap/Thyroid_vs_brain.csv.gz", sep=",", head=TRUE)
+White = read.csv("data/RNASeq_bodymap/White_vs_brain.csv.gz", sep=",", head=TRUE)
 
-Adipose = read.csv("~/Adipose_vs_brain.csv", sep=",", head=TRUE)
-Adrenal = read.csv("~/Adrenal_vs_brain.csv", sep=",", head=TRUE)
-Breast = read.csv("~/Breast_vs_brain.csv", sep=",", head=TRUE)
-Colon = read.csv("~/Colon_vs_brain.csv", sep=",", head=TRUE)
-Heart = read.csv("~/Heart_vs_brain.csv", sep=",", head=TRUE)
-Kidney = read.csv("~/Kidney_vs_brain.csv", sep=",", head=TRUE)
-Liver = read.csv("~/Liver_vs_brain.csv", sep=",", head=TRUE)
-Lung = read.csv("~/Lung_vs_brain.csv", sep=",", head=TRUE)
-Lymph = read.csv("~/Lymph_vs_brain.csv", sep=",", head=TRUE)
-Ovary = read.csv("~/Ovary_vs_brain.csv", sep=",", head=TRUE)
-Prostate = read.csv("~/Prostate_vs_brain.csv", sep=",", head=TRUE)
-Skeletal = read.csv("~/Skel_muscle_vs_brain.csv", sep=",", head=TRUE)
-Testes = read.csv("~/Testes_vs_brain.csv", sep=",", head=TRUE)
-Thyroid = read.csv("~/Thyroid_vs_brain.csv", sep=",", head=TRUE)
-White = read.csv("~/White_vs_brain.csv", sep=",", head=TRUE)
 
+message('Done parsing the input files')
 
 # Process data for Adipose
 
@@ -836,10 +833,10 @@ White5$Type <- "DMD"
 White6 <- rbind(White2, White3, White4, White5) 
 White_scatter <- ggplot(White6, aes(Length, value, color=Type, size=factor(Type), fill=factor(Type))) + geom_point() + scale_colour_manual(values=c("black", "grey65", "red", "blue")) + scale_size_manual(values=c(1.6, 0.8, 1.6, 1.6)) + scale_x_log10() + geom_hline(yintercept=0, colour="steelblue", linetype = "longdash", size=0.5) + geom_vline(xintercept=150000, colour="steelblue", linetype = "longdash", size=0.5) + stat_smooth(data=subset(White2, Length>0), size=0.7, colour="green3") + ylim(c(-20,20)) + labs(x="log10(Gene Length)", y="log2(foldChange)", title="Brain vs. White") + theme(legend.position="none")
 
-install.packages("gridExtra")
-require(gridExtra)
 
-pdf(file='~/Desktop/Bodymap_vs_brain_GeneLength.pdf', width=9, height=11)
+
+pdf(file='fig/Bodymap_vs_brain_GeneLength.pdf', width=9, height=11)
 grid.arrange(Adipose_scatter, Adrenal_scatter, Breast_scatter, Colon_scatter, Heart_scatter, Kidney_scatter, Liver_scatter, Lung_scatter, Lymph_scatter, Ovary_scatter, Prostate_scatter, Skeletal_scatter, Testes_scatter, Thyroid_scatter, White_scatter, ncol=3)
 dev.off()
+
 
