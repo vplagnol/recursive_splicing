@@ -835,7 +835,7 @@ White_scatter <- ggplot(White6, aes(Length, value, color=Type, size=factor(Type)
 
 
 
-pdf(file='fig/Bodymap_vs_brain_GeneLength.pdf', width=9, height=11)
+pdf(file='fig/ED1A_Bodymap_vs_brain_GeneLength.pdf', width=9, height=11)
 grid.arrange(Adipose_scatter, Adrenal_scatter, Breast_scatter, Colon_scatter, Heart_scatter, Kidney_scatter, Liver_scatter, Lung_scatter, Lymph_scatter, Ovary_scatter, Prostate_scatter, Skeletal_scatter, Testes_scatter, Thyroid_scatter, White_scatter, ncol=3)
 dev.off()
 
