@@ -1,3 +1,3 @@
 git add -u
-git commit -m "Fixed incomplete R output files"
+git commit -m "Removed a redundant figure script"
 git push -u origin master
