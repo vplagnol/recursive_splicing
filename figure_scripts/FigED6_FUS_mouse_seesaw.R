@@ -2,12 +2,12 @@
 
 library(GenomicRanges)
 
-##count.data <- read.table("data/group_3094_FUS-E18-all_sum_G_mm9--ensembl59_from_2320-3089-3090_bedGraph-cDNA-hits-in-genome.bed.gz", header = FALSE, sep = "\t", skip = 1)
+count.data <- read.table("data/group_3094_FUS-E18-all_sum_G_mm9--ensembl59_from_2320-3089-3090_bedGraph-cDNA-hits-in-genome.bed.gz", header = FALSE, sep = "\t", skip = 1)
 
 mouse.RSS <- read.csv("data/Mouse_RSS_mm9.csv", header = FALSE, stringsAsFactors = FALSE)
 
 
-output.pdf <- "histo_mouse.pdf"
+output.pdf <- "fig/ED6_mouse_FUS_seesaw.pdf"
 pdf(output.pdf, width = 4*2, height = 3*4)
 par(mfrow = c(4, 2))
 n.sites <- nrow(mouse.RSS)
