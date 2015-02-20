@@ -2,7 +2,7 @@
 
 library(GenomicRanges)
 
-#count.data <- read.table("data/group_3094_FUS-E18-all_sum_G_mm9--ensembl59_from_2320-3089-3090_bedGraph-cDNA-hits-in-genome.bed.gz", header = FALSE, sep = "\t", skip = 1)
+count.data <- read.table("data/group_3094_FUS-E18-all_sum_G_mm9--ensembl59_from_2320-3089-3090_bedGraph-cDNA-hits-in-genome.bed.gz", header = FALSE, sep = "\t", skip = 1)
 
 intron.positions <- read.csv("data/Mouse_RSS_introns.csv", header = FALSE, stringsAsFactors = FALSE)
 mouse.RSS <- read.csv("data/Mouse_RSS_mm9.csv", header = FALSE, stringsAsFactors = FALSE)
